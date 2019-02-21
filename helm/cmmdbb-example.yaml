@@ -1,0 +1,22 @@
+global:
+  imageCredentials:
+    registry: "yourreg.com"
+    email: "user@domain"
+    password: "pass"
+    username: "user"
+image:
+  repository: "cmweb.azurecr.io/cmmdbb"
+  tag: 0.2.3
+  pullPolicy: IfNotPresent
+crontab: "00 11,23 * * *" # 11:0, 23:00 UTC daily
+gpg:
+  enabled: true
+  publicKey: "aF3IB...xAf3=="
+configMap:
+  data:
+    APP_NAME: "test"
+    S3_BUCKET_NAME: "myfancybucket"
+    S3_ACCESS_KEY: "AKI3XOXOXOXOXOXOXOX"
+    S3_SECRET_KEY: "9lU....meh"
+    MONGO_HOST: "localhost:27017"
+    MONGODUMP_OPTIONS: "--db dbname"

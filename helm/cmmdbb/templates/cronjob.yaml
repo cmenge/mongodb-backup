@@ -1,0 +1,32 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ template "cmmdbb.fullname" . }}
+spec:
+  schedule: {{ .Values.crontab | quote }}
+  startingDeadlineSeconds: 3600
+  concurrencyPolicy: Replace
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          imagePullSecrets:
+          - name: {{ template "cmmdbb.fullname" . }}
+          volumes:
+          - name: "backups"
+          - name: gpgpk
+            secret:
+              secretName: {{ template "cmmdbb.fullname" . }}-encryption-pk
+          containers:
+          - name: {{ .Chart.Name }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            volumeMounts:
+            - mountPath: "/backups"
+              name: "backups"
+            - mountPath: "/etc/gpg-pk"
+              name: gpgpk
+              readOnly: true
+            envFrom:
+            - configMapRef:
+                name: {{ template "cmmdbb.fullname" . }}

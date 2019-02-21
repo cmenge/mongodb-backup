@@ -1,0 +1,20 @@
+# Default values for cmmdbb.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+image:
+  repository: "cmweb.azurecr.io/cmmdbb"
+  tag: 0.2.3
+  pullPolicy: IfNotPresent
+service:
+  name: mongo-backup
+ingress:
+  enabled: false
+resources: {}
+crontab: "@daily"
+configMap:
+  data:
+    APP_NAME: "example"
+gpg:
+  enabled: false
+  publicKey: ""

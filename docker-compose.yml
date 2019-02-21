@@ -1,0 +1,22 @@
+version: '3'
+# this used to be helpful, but since encryption relies on mounting
+# a fancily reconstructed file... not so much anymore
+services:
+  # mongo:
+  #  image: 'mongo:4.0.0-xenial'
+  cmmdbb:
+    image: cmmdbb
+    build:
+      context: ./cmmdbb
+      dockerfile: dockerfile
+    # volumes:
+    #   - ./backups:/backups/
+    # depends_on:
+    #   - "mongo"
+    # environment:
+    #   - APP_NAME=test123
+    #   - MONGO_HOST="mongo:27017"
+    #   - S3_BUCKET_NAME=bucket-example
+    #   - S3_ACCESS_KEY=...
+    #   - S3_SECRET_KEY=sF09...
+    #   - MONGODUMP_OPTIONS=--db test
