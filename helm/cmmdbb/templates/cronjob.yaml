@@ -24,9 +24,11 @@ spec:
             volumeMounts:
             - mountPath: "/backups"
               name: "backups"
+            {{- if .Values.gpg.enabled }}
             - mountPath: "/etc/gpg-pk"
               name: gpgpk
               readOnly: true
+            {{- end }}
             envFrom:
             - configMapRef:
                 name: {{ template "cmmdbb.fullname" . }}
