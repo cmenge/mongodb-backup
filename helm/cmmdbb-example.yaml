@@ -6,7 +6,7 @@ global:
     username: "user"
 image:
   repository: "cmweb.azurecr.io/cmmdbb"
-  tag: 0.2.3
+  tag: 0.2.5
   pullPolicy: IfNotPresent
 crontab: "00 11,23 * * *" # 11:0, 23:00 UTC daily
 gpg:
@@ -18,5 +18,5 @@ configMap:
     S3_BUCKET_NAME: "myfancybucket"
     S3_ACCESS_KEY: "AKI3XOXOXOXOXOXOXOX"
     S3_SECRET_KEY: "9lU....meh"
-    MONGO_HOST: "localhost:27017"
+    MONGO_URI: "mongodb://john:doe@localhost:27017?readPreference=secondary"
     MONGODUMP_OPTIONS: "--db dbname"

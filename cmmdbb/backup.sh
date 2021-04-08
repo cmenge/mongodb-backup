@@ -1,5 +1,6 @@
 #!/bin/bash
-echo "CM MongoDB Backup (cmmdbb) v.0.2.3, 2019-02-21"
+# TBD upgrade to use new mongo tools
+echo "CM MongoDB Backup (cmmdbb) v.0.2.5, 2021-04-08 / still using mongodb-org-tools 4.0.0!"
 if [ -z "$APP_NAME" ]
 then
   echo "APP_NAME must be set, exiting!"
@@ -15,7 +16,7 @@ sleep 3 # helpful for local testing
 # To inject more options, like '--db test', /u, /p, /oplog, etc.
 MONGODUMP_OPTIONS=${MONGODUMP_OPTIONS:-""}
 
-echo "Backup started for $MONGO_HOST, db $MONGO_DATABASE"
+echo "MongoDB Backup started..."
 TIMESTAMP=`date +%F-%H%M`
 MONGODUMP_PATH="/usr/bin/mongodump"
 GPG_PATH="gpg"
@@ -29,8 +30,8 @@ then
 else
   mkdir $BACKUPS_DIR
 fi
-echo "executing $MONGODUMP_PATH --host $MONGO_HOST $MONGODUMP_OPTIONS --archive=$ARCHIVE_PATH --gzip"
-$MONGODUMP_PATH --host $MONGO_HOST $MONGODUMP_OPTIONS --archive=$ARCHIVE_PATH --gzip
+echo "executing $MONGODUMP_PATH --uri $MONGO_URI $MONGODUMP_OPTIONS --archive=$ARCHIVE_PATH --gzip"
+$MONGODUMP_PATH --uri $MONGO_URI $MONGODUMP_OPTIONS --archive=$ARCHIVE_PATH --gzip
 
 if [ -e $ARCHIVE_PATH ]
 then
