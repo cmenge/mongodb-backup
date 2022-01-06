@@ -4,7 +4,7 @@
 replicaCount: 1
 image:
   repository: "cmweb.azurecr.io/cmmdbb"
-  tag: 0.2.5
+  tag: 0.3.0
   pullPolicy: IfNotPresent
 service:
   name: mongo-backup

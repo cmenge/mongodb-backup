@@ -1,12 +1,12 @@
-FROM debian:9.7-slim
-# apt-key requires gnupg https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=869873
-# we're using gnupg for encryption as well, so that makes sense...
+FROM debian:10-slim
+# mongodb tools currently officially supports Debian 8, 9, 10 -- weird,
+# given that 10 is "oldstable" and 8 officially obsolete as of Jan '22
+# NOTE: Don't use the debian standard package "mogon-tools", they are very, very outdated!
+# ---
 RUN apt-get update && \
-    apt-get install -y gnupg curl
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4 && \
-    echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.0 main" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list && \
-    apt-get update && \
-    apt-get install -y mongodb-org-tools=4.0.0 s3cmd && \
+    apt-get install -y gnupg curl s4cmd && \
+    curl https://fastdl.mongodb.org/tools/db/mongodb-database-tools-debian10-x86_64-100.5.1.deb --output mongo-tools.deb && \
+    apt install ./mongo-tools.deb && \
     apt-get clean
 WORKDIR /scripts
 COPY backup.sh ./

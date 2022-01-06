@@ -1,4 +1,4 @@
 apiVersion: v1
 description: Make mongo backups, encrypt and upload to S3
 name: cmmdbb
-version: 0.2.5
+version: 0.3.0

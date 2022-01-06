@@ -6,7 +6,7 @@ global:
     username: "user"
 image:
   repository: "cmweb.azurecr.io/cmmdbb"
-  tag: 0.2.5
+  tag: 0.3.0
   pullPolicy: IfNotPresent
 crontab: "00 11,23 * * *" # 11:0, 23:00 UTC daily
 gpg:
